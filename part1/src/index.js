@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import Hello from './components/Greeting';
 
+const App = (props) => {
+    const [ counter, setCounter ] = useState(0);
 
-const App = () => {
-    const name = 'Peter';
-    const age = '10'
+    setTimeout(() => setCounter(counter + 1), 1000);
+
     return(
         <>
-            <h1>Greetings</h1>
-            <Hello name="Maya" age={26 + 10} />
-            <Hello name={name} age={age} />
+            <h1>Greetings {counter}</h1>
         </>
     )
 }
