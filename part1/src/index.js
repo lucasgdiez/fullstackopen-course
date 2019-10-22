@@ -16,15 +16,18 @@ const App = (props) => {
     const handleReset = () => {
         setCounter(0)
     }
-
-    const setToValue = (value) => setCounter(value);
+    const setToValue = (value) => {
+        return () => {
+            setCounter(value)
+        }
+    }
 
     return(
         <>
             <h1>Greetings {counter}</h1>
-            <button onClick={() => setToValue(counter + 1)}>+</button>
-            <button onClick={() => setToValue(counter - 1)}>-</button>
-            <button onClick={() => setToValue(0)}>RESET</button>
+            <button onClick={setToValue(counter + 1)}>+</button>
+            <button onClick={setToValue(counter - 1)}>-</button>
+            <button onClick={setToValue(0)}>RESET</button>
         </>
     )
 }
