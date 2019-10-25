@@ -4,16 +4,21 @@ import Display from "./components/Display";
 import Button from "./components/Button";
 
 const App = (props) => {
-  const [left, setLeft] = useState(0);
-  const [right, setRight] = useState(0);
+  const [clicks, setClicks] = useState({
+    left: 0,
+    right: 0
+  });
+
+  const handleLeftClick = () => setClicks({ ...clicks, left: clicks.left + 1 });
+  const handleRightClick = () => setClicks({ ...clicks, right: clicks.right + 1 });
 
   return (
     <>
       <div>
-        <p>The left: {left}</p>
-        <Button onClick={() => setLeft(left + 1)} text='left' />
-        <p>The right: {right}</p>
-        <Button onClick={() => setRight(right + 1)} text='right' />
+        <p>The left: {clicks.left}</p>
+        <Button onClick={() => handleLeftClick()} text='left' />
+        <p>The right: {clicks.right}</p>
+        <Button onClick={() => handleRightClick()} text='right' />
       </div>
     </>
   );
