@@ -1,9 +1,11 @@
 import React from "react";
 
-const Display = ({ counter }) => {
+const Display = ({ text, counter }) => {
   return (
     <div>
-      <h1>Greetings {counter}</h1>
+      <h1>
+        {text} {counter}
+      </h1>
     </div>
   );
 };
