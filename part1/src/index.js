@@ -4,30 +4,17 @@ import Display from "./components/Display";
 import Button from "./components/Button";
 
 const App = (props) => {
-  const [counter, setCounter] = useState(0);
-
-  const handleSum = () => {
-    setCounter(counter + 1);
-  };
-
-  const handleSbstrc = () => {
-    setCounter(counter - 1);
-  };
-
-  const handleReset = () => {
-    setCounter(0);
-  };
-
-  const setToValue = (value) => () => {
-    setCounter(value);
-  };
+  const [left, setLeft] = useState(0);
+  const [right, setRight] = useState(0);
 
   return (
     <>
-      <Display counter={counter} />
-      <Button onClick={setToValue(counter + 1)} text='+' />
-      <Button onClick={setToValue(counter - 1)} text='-' />
-      <Button onClick={setToValue(0)} text='reset' />
+      <div>
+        <p>The left: {left}</p>
+        <Button onClick={() => setLeft(left + 1)} text='left' />
+        <p>The right: {right}</p>
+        <Button onClick={() => setRight(right + 1)} text='right' />
+      </div>
     </>
   );
 };
