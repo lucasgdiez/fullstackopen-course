@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Display from "./components/Display";
 import Button from "./components/Button";
+import History from "./components/History";
 
 const App = (props) => {
   const [clicks, setClicks] = useState({
@@ -26,7 +27,7 @@ const App = (props) => {
         <Button onClick={() => handleLeftClick()} text='left' />
         <Display text='right' counter={clicks.right} />
         <Button onClick={() => handleRightClick()} text='right' />
-        <p>{allClicks.length > 0 ? allClicks.join(" ") : "Awaiting..."} </p>
+        <History allClicks={allClicks} />
       </div>
     </>
   );
