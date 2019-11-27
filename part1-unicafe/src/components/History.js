@@ -1,11 +1,25 @@
 import React from "react";
 
+const totalSum = (...props) => {
+  const sum = props.reduce((prevVal, currentValue) => {
+    return prevVal + currentValue;
+  });
+
+  return sum;
+};
+
 const totalAverage = (...props) => {
   const reducedValues = props.reduce((prevVal, currentValue) => {
     return (prevVal + currentValue) / props.length;
   }, 0);
 
   return reducedValues.toFixed(2);
+};
+
+const totalPercentage = (value, total) => {
+  const percentage = (value * 100) / total;
+
+  return percentage + " %";
 };
 
 const History = ({ allValues }) => {
@@ -26,7 +40,7 @@ const History = ({ allValues }) => {
         <li style={{ listStyle: "none", fontWeight: 600 }}>
           All:{" "}
           {allValues.Good || allValues.Neutral || allValues.Bad > 0 ? (
-            <span>{allValues.Good + allValues.Neutral + allValues.Bad}</span>
+            <span>{totalSum(allValues.Good, allValues.Neutral, allValues.Bad)}</span>
           ) : (
             "Empty."
           )}
@@ -35,6 +49,19 @@ const History = ({ allValues }) => {
           Average:{" "}
           {allValues.Good || allValues.Neutral || allValues.Bad > 0 ? (
             <span>{totalAverage(allValues.Good, allValues.Neutral, allValues.Bad)}</span>
+          ) : (
+            "Empty."
+          )}
+        </li>
+        <li style={{ listStyle: "none", fontWeight: 600 }}>
+          Percentage:{" "}
+          {allValues.Good || allValues.Neutral || allValues.Bad > 0 ? (
+            <span>
+              {totalPercentage(
+                allValues.Good,
+                totalSum(allValues.Good, allValues.Neutral, allValues.Bad)
+              )}
+            </span>
           ) : (
             "Empty."
           )}
