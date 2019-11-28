@@ -1,40 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import Display from "./components/Display";
+import Button from "./components/Button";
+import History from "./components/History";
 
-import Header from './components/Header';
-import Content from './components/Content';
-import Total from './components/Total';
+const App = (props) => {
+  const [clicks, setClicks] = useState({
+    left: 0,
+    right: 0
+  });
+  const [allClicks, setAll] = useState([]);
 
+  const handleLeftClick = () => {
+    setClicks({ ...clicks, left: clicks.left + 1 });
+    setAll(allClicks.concat("L"));
+  };
+  const handleRightClick = () => {
+    setClicks({ ...clicks, right: clicks.right + 1 });
+    setAll(allClicks.concat("R"));
+  };
 
-const App = () => {
-    const course = 'Half Stack application development';
-    const part1 = 'Fundamentals of React';
-    const exercises1 = 10;
-    const part2 = 'Using props to pass data';
-    const exercises2 = 7;
-    const part3 = 'State of a component';
-    const exercises3 = 14;
+  return (
+    <>
+      <div>
+        <Display text='left' counter={clicks.left} />
+        <Button onClick={() => handleLeftClick()} text='left' />
+        <Display text='right' counter={clicks.right} />
+        <Button onClick={() => handleRightClick()} text='right' />
+        <History allClicks={allClicks} />
+      </div>
+    </>
+  );
+};
 
-    const parts = [
-        {part1, exercises1},
-        {part2, exercises2},
-        {part3, exercises3},
-    ]
-
-    const exercises = [
-        exercises1,
-        exercises2,
-        exercises3
-    ]
-
-    return(
-        <>
-            <Header course={course}/>
-            <Content textContent={parts} />
-            <Total exercises={exercises}/>
-            <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
-        </>
-    )
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
