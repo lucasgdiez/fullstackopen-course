@@ -5,7 +5,7 @@ const Statistics = ({ allValues }) => {
   return (
     <div>
       <h3>Statistics</h3>
-      <History allValues={allValues} />
+      <History {...allValues} />
     </div>
   );
 };

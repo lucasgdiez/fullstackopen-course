@@ -22,46 +22,28 @@ const totalPercentage = (value, total) => {
   return percentage + " %";
 };
 
-const History = ({ allValues }) => {
+const History = ({ Good, Neutral, Bad }) => {
   return (
     <div>
       <ul style={{ padding: "0" }}>
+        <li style={{ listStyle: "none" }}>Good: {Good > 0 ? <span>{Good}</span> : "Empty."}</li>
         <li style={{ listStyle: "none" }}>
-          Good: {allValues.Good > 0 ? <span>{allValues.Good}</span> : "Empty."}
+          Neutral: {Neutral > 0 ? <span>{Neutral}</span> : "Empty."}
         </li>
-        <li style={{ listStyle: "none" }}>
-          Neutral: {allValues.Neutral > 0 ? <span>{allValues.Neutral}</span> : "Empty."}
-        </li>
-        <li style={{ listStyle: "none" }}>
-          Bad: {allValues.Bad > 0 ? <span>{allValues.Bad}</span> : "Empty."}
-        </li>
+        <li style={{ listStyle: "none" }}>Bad: {Bad > 0 ? <span>{Bad}</span> : "Empty."}</li>
       </ul>
       <ul style={{ padding: "0" }}>
         <li style={{ listStyle: "none", fontWeight: 600 }}>
-          All:{" "}
-          {allValues.Good || allValues.Neutral || allValues.Bad > 0 ? (
-            <span>{totalSum(allValues.Good, allValues.Neutral, allValues.Bad)}</span>
-          ) : (
-            "Empty."
-          )}
+          All: {Good || Neutral || Bad > 0 ? <span>{totalSum(Good, Neutral, Bad)}</span> : "Empty."}
         </li>
         <li style={{ listStyle: "none", fontWeight: 600 }}>
           Average:{" "}
-          {allValues.Good || allValues.Neutral || allValues.Bad > 0 ? (
-            <span>{totalAverage(allValues.Good, allValues.Neutral, allValues.Bad)}</span>
-          ) : (
-            "Empty."
-          )}
+          {Good || Neutral || Bad > 0 ? <span>{totalAverage(Good, Neutral, Bad)}</span> : "Empty."}
         </li>
         <li style={{ listStyle: "none", fontWeight: 600 }}>
           Percentage:{" "}
-          {allValues.Good || allValues.Neutral || allValues.Bad > 0 ? (
-            <span>
-              {totalPercentage(
-                allValues.Good,
-                totalSum(allValues.Good, allValues.Neutral, allValues.Bad)
-              )}
-            </span>
+          {Good || Neutral || Bad > 0 ? (
+            <span>{totalPercentage(Good, totalSum(Good, Neutral, Bad))}</span>
           ) : (
             "Empty."
           )}
