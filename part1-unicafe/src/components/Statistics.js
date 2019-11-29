@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import History from "./History";
 
 const Statistics = ({ allValues }) => {

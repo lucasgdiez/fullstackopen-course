@@ -1,4 +1,5 @@
 import React from "react";
+import Statistic from "./Statistic";
 
 const totalSum = (...props) => {
   const sum = props.reduce((prevVal, currentValue) => {
@@ -19,35 +20,27 @@ const totalAverage = (...props) => {
 const totalPercentage = (value, total) => {
   const percentage = (value * 100) / total;
 
-  return percentage + " %";
+  return percentage;
 };
+
+//Refactor into single statistic passing props;
 
 const History = ({ Good, Neutral, Bad }) => {
   return (
     <div>
       <ul style={{ padding: "0" }}>
-        <li style={{ listStyle: "none" }}>Good: {Good > 0 ? <span>{Good}</span> : "Empty."}</li>
-        <li style={{ listStyle: "none" }}>
-          Neutral: {Neutral > 0 ? <span>{Neutral}</span> : "Empty."}
-        </li>
-        <li style={{ listStyle: "none" }}>Bad: {Bad > 0 ? <span>{Bad}</span> : "Empty."}</li>
+        <Statistic text='Good' value={Good} />
+        <Statistic text='Neutral' value={Neutral} />
+        <Statistic text='Bad' value={Bad} />
       </ul>
       <ul style={{ padding: "0" }}>
-        <li style={{ listStyle: "none", fontWeight: 600 }}>
-          All: {Good || Neutral || Bad > 0 ? <span>{totalSum(Good, Neutral, Bad)}</span> : "Empty."}
-        </li>
-        <li style={{ listStyle: "none", fontWeight: 600 }}>
-          Average:{" "}
-          {Good || Neutral || Bad > 0 ? <span>{totalAverage(Good, Neutral, Bad)}</span> : "Empty."}
-        </li>
-        <li style={{ listStyle: "none", fontWeight: 600 }}>
-          Percentage:{" "}
-          {Good || Neutral || Bad > 0 ? (
-            <span>{totalPercentage(Good, totalSum(Good, Neutral, Bad))}</span>
-          ) : (
-            "Empty."
-          )}
-        </li>
+        <Statistic text='All' value={totalSum(Good, Neutral, Bad)} />
+        <Statistic text='Average' value={totalAverage(Good, Neutral, Bad)} />
+        <Statistic
+          text='Percentage'
+          value={totalPercentage(Good, totalSum(Good, Neutral, Bad))}
+          percentage={true}
+        />
       </ul>
     </div>
   );
