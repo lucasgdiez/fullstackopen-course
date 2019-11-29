@@ -27,6 +27,8 @@ function App() {
       case badType:
         setHistory({ ...history, Bad: history.Bad + 1 });
         break;
+      default:
+        return undefined;
     }
   };
 
